@@ -1,7 +1,7 @@
 onload = function(){
   var canvas = document.getElementById('canvas');
-  canvas.width = 500;
-  canvas.height = 300;
+  c.width = 500;
+  c.height = 300;
 
   var gl = c.getContext('webgl') || c.getContext('experimental-webgl');
 
@@ -57,10 +57,11 @@ onload = function(){
 
     var rad = (count % 360) * Math.PI / 180;
 
-    m.identity(wMatrix);
-    m.translate(wMatrix, [1.0, -1.0, 0.0], wMatrix);
-    m.rotate(wMatrix, rad, [0, 1, 0], wMatrix);
-
+    var x = Math.cos(rad);
+    var y = Math.sin(rad);
+    m.identity(mMatrix);
+    m.translate(mMatrix, [x, y + 1.0, 0.0], mMatrix);
+	  
     m.multiply(vpMatrix, wMatrix, wvpMatrix);
     gl.uniformMatrix4fv(uniLocation, false, wvpMatrix);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
