@@ -43,15 +43,14 @@ onload = function(){
   var pMatrix = m.identity(m.create());
   var vpMatrix = m.identity(m.create());
   var wvpMatrix = m.identity(m.create());
+  var tmpMatrix = m.identity(m.create());
 
-  m.lookAt([0.0, 0.0, 5.0], [0, 0, 0], [0, 1, 0], vMatrix);// カメラ位置、注視点、上方向
-  m.perspective(45, c.width / c.height, 0.1, 100, pMatrix);// 画角 アスペクト比,近クリップ面,遠方クリップ面
-  m.multiply(pMatrix, vMatrix, vpMatrix);
+  m.lookAt([0.0, 0.0, 5.0], [0, 0, 0], [0, 1, 0], vMatrix);
+  m.perspective(45, c.width / c.height, 0.1, 100, pMatrix);
   
   var count = 0;
 	
   (function(){
-    // canvasを初期化
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clearDepth(1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
